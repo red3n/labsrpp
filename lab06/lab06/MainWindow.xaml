@@ -1,0 +1,68 @@
+﻿<Window x:Class="lab06.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:lab06"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="Control">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="DarkBlue"/>
+        </Style>
+    </Window.Resources>
+
+    <!-- 🔹 ОСНОВНОЙ КОНТЕЙНЕР -->
+    <DockPanel Margin="10">
+
+        <!-- Заголовок -->
+        <TextBlock DockPanel.Dock="Top"
+                   Text="Построитель предложений (География)"
+                   FontSize="18"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,10"/>
+
+        <!-- Прилагательное -->
+        <GroupBox Header="Прилагательное"
+                  DockPanel.Dock="Left"
+                  Width="150"
+                  Margin="0,0,10,0">
+            <StackPanel>
+                <RadioButton Content="Большая"/>
+                <RadioButton Content="Горная"/>
+                <RadioButton Content="Огромная"/>
+                <RadioButton Content="Глубокая"/>
+                <RadioButton Content="Высокая"/>
+            </StackPanel>
+        </GroupBox>
+
+        <!-- Существительное -->
+        <ComboBox x:Name="cbNoun"
+                  Width="150"
+                  Margin="0,0,10,0"/>
+
+        <!-- Глагол -->
+        <ListBox x:Name="lbVerb" Width="150">
+            <ListBoxItem Content="находится"/>
+            <ListBoxItem Content="протекает"/>
+            <ListBoxItem Content="расположена"/>
+        </ListBox>
+
+        <!-- Кнопка -->
+        <Button DockPanel.Dock="Bottom"
+                Content="Построить"
+                Margin="0,10,0,0"
+                Click="BtnBuild_Click"/>
+
+        <!-- Результат -->
+        <Expander DockPanel.Dock="Bottom" Header="Результат">
+            <Label x:Name="lblResult"
+                   FontSize="16"
+                   FontWeight="Bold"/>
+        </Expander>
+
+    </DockPanel>
+</Window>
