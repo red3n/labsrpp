@@ -1,0 +1,62 @@
+﻿@Html.ValidationSummary(true, "", new { @class = "error" })
+@model WebApplication2.Models.Calculator
+@{
+    ViewData["Title"] = "Калькулятор";
+}
+
+<h2>Калькулятор</h2>
+
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.LabelFor(m => m.Operand1)
+        @Html.TextBoxFor(m => m.Operand1, new { @class = "textBoxStyle" })
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.Operand2)
+        @Html.TextBoxFor(m => m.Operand2)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.Operation)
+
+        @Html.ListBoxFor(m => m.Operation, new List<SelectListItem>
+        {
+            new SelectListItem { Text = "+", Value = "+" },
+        new SelectListItem { Text = "-", Value = "-" },
+        new SelectListItem { Text = "*", Value = "*" },
+        new SelectListItem { Text = "/", Value = "/" }
+        })
+</div>
+
+<br />
+
+<button type="submit" name="actionType" value="calculate">Вычислить</button>
+<button type="submit" name="actionType" value="clear">Очистить</button>
+
+<div>
+    <h3>Результат: @Model.Result</h3>
+</div>
+}
+@if (Model != null)
+{
+    if (Model.Result == ViewBag.ExpectedValue)
+    {
+        <p style="color: green;">Результат совпадает с заданным значением!</p>
+    }
+    else
+    {
+        <p style="color: red;">Результат НЕ совпадает с заданным значением!</p>
+    }
+}
+@if (Model != null)
+{
+    var expression = Model.Operand1 + " " + Model.Operation + " " + Model.Operand2 + " = " + Model.Result;
+
+    @Html.ActionLink(
+    "Перейти к результату",
+        "Result",
+        new { expression = expression }
+    )
+}
