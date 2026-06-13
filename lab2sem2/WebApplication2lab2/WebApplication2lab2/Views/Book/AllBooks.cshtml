@@ -1,0 +1,52 @@
+﻿@model WebApplication2lab2.Models.Book[]
+@using WebApplication2lab2.Helpers
+@using Microsoft.AspNetCore.Html
+
+@{
+    ViewBag.Title = "Список книг";
+}
+
+<h2>Список всех книг</h2>
+
+@if ((bool)ViewData["UseExternalHelper"]!)
+{
+    @* Вызов внешнего вспомогательного метода *@
+    @BookHelpers.ShowBooksList(Model!, WebApplication2lab2.Controllers.BookController.count)
+}
+else
+{
+    @* Вызов внутреннего вспомогательного метода *@
+    @ShowBooksInner(Model!, WebApplication2lab2.Controllers.BookController.count)
+}
+
+<p><a asp-action="Create">Добавить книгу</a></p>
+
+@functions {
+    // Внутренний вспомогательный метод
+    IHtmlContent ShowBooksInner(WebApplication2lab2.Models.Book[] list, int booksCount)
+    {
+        var sb = new System.Text.StringBuilder();
+
+        sb.Append("<table border='1' cellpadding='5'>");
+        sb.Append("<tr><th>Название</th><th>Автор</th><th>Год</th><th>Цена</th><th>Дата поступления</th></tr>");
+
+        foreach (var book in list)
+        {
+            if (book != null)
+            {
+                sb.Append("<tr>");
+                sb.Append("<td>" + book.Title + "</td>");
+                sb.Append("<td>" + book.Author + "</td>");
+                sb.Append("<td>" + book.Year + "</td>");
+                sb.Append("<td>" + book.Price + "</td>");
+                sb.Append("<td>" + book.ArrivalDate.ToShortDateString() + "</td>");
+                sb.Append("</tr>");
+            }
+        }
+
+        sb.Append("</table>");
+        sb.Append("<p>Внутренний вспомогательный метод. Всего книг: " + booksCount + "</p>");
+
+        return new HtmlString(sb.ToString());
+    }
+}

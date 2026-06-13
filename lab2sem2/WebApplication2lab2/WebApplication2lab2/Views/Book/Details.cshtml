@@ -1,0 +1,30 @@
+﻿@model WebApplication2lab2.Models.Book
+
+@{
+    ViewBag.Title = "Просмотр книги";
+}
+
+<h2>Информация о книге</h2>
+
+<div>
+    @Html.LabelFor(m => m.Title)
+    @Html.DisplayFor(m => m.Title)
+</div>
+<div>
+    @Html.LabelFor(m => m.Author)
+    @Html.DisplayFor(m => m.Author)
+</div>
+<div>
+    @Html.LabelFor(m => m.Year)
+    @Html.DisplayFor(m => m.Year)
+</div>
+<div>
+    @Html.LabelFor(m => m.Price)
+    @Html.DisplayFor(m => m.Price)
+</div>
+<div>
+    @Html.LabelFor(m => m.ArrivalDate)
+    @Html.DisplayFor(m => m.ArrivalDate)
+</div>
+
+<p>@Html.ActionLink("Список всех книг", "AllBooks")</p>

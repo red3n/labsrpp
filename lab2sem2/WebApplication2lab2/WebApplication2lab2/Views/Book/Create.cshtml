@@ -1,0 +1,18 @@
+﻿@model WebApplication2lab2.Models.Book
+
+@{
+    ViewBag.Title = "Добавление книги";
+}
+
+<h2>Добавление книги</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.LabelForModel()
+    <br />
+    @Html.EditorForModel()
+    <br />
+    <input type="submit" value="Сохранить" />
+}
+
+<p>@Html.ActionLink("Список всех книг", "AllBooks")</p>
